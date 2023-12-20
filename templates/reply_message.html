@@ -1,0 +1,22 @@
+<!-- Display the original message -->
+{#<p><strong>{{ original_message.sender.username }}</strong>: {{ original_message.content }}</p>#}
+
+<!-- Display the doctor's reply if it exists -->
+{% if original_message.is_doctor_reply and original_message.doctor_reply %}
+    <p>
+{#        <strong>{{ original_message.sender.username }}</strong>#}
+        <strong>Your Reply:</strong> {{ original_message.doctor_reply }}</p>
+{% endif %}
+
+<!-- Display the reply form only if the logged-in user is a doctor -->
+{% if is_doctor_reply %}
+    <form method="post" action="{% url 'Afya:reply_message' original_message.id %}">
+        {% csrf_token %}
+{#        <label for="content">Reply:</label>#}
+        <textarea placeholder="Reply Here" name="content" rows="4" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Send Reply">
+    </form>
+{% else %}
+    <p>Only doctors can reply to messages.</p>
+{% endif %}

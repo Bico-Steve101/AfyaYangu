@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ doctor.name }}'s Profile</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+</head>
+<body>
+<nav class="navbar">
+    <ul>
+        <li class="home"><a href="{% url 'Afya:index' %}">Home</a></li> <!-- Add this line for the home link -->
+        <!-- Add other navbar links as needed -->
+        <!-- For example, you might have links for Products, Doctors, Users, etc. -->
+    </ul>
+</nav>
+<!-- Display doctor information -->
+<div id="doctor-profile" class="container">
+    <h2>{{ doctor.name }}'s Profile</h2>
+    <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}" width="200">
+    <p>{{ doctor.description }}</p>
+</div>
+
+<!-- Display user messages -->
+<div id="user-messages" class="container">
+    <h2>User Messages</h2>
+    <ul>
+        {% for message in messages %}
+            {% if message.sender.username == user.username %}
+                <li>
+                    <strong>{{ message.sender.username }}</strong>:
+                    {% if message.is_doctor_reply and message.doctor_reply %}
+                        (Doctor's Reply): {{ message.doctor_reply }}
+                    {% else %}
+                        {{ message.content }}
+                    {% endif %}
+                    {% if is_doctor and request.user == doctor.user %}
+                        <br>
+                        <a href="#" class="reply-link" data-message-id="{{ message.id }}">Reply</a>
+                        <div id="reply-form-container-{{ message.id }}" class="reply-form">
+                            <!-- Reply form content loaded dynamically by JavaScript -->
+                        </div>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Form for sending messages -->
+<div class="form-group">
+{#{% if is_doctor and request.user == doctor.user %}#}
+    <form method="post" action="{% url 'Afya:doctor_profile' doctor_id=doctor.id %}">
+        {% csrf_token %}
+        <label for="content">Send Message:</label>
+        <textarea placeholder="Enter Message Here" name="content" rows="4" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Send Message">
+    </form>
+{#{% else %}#}
+{#    <p>Only doctors can send messages.</p>#}
+{#{% endif %}#}
+</div>
+<!-- AJAX script -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".reply-link").on("click", function(event) {
+            event.preventDefault();
+            var messageId = $(this).data("message-id");
+            var replyFormContainer = $("#reply-form-container-" + messageId);
+
+            // Ensure that messageId is valid before making the AJAX request
+            if (messageId) {
+                // Load the reply form using AJAX
+                $.get("{% url 'Afya:reply_message' 999 %}".replace('999', messageId), function(data) {
+                    replyFormContainer.html(data);
+                    replyFormContainer.slideToggle();
+                });
+            }
+        });
+    });
+</script>
+<script src="{% static 'js/dashboard.js' %}"></script>
+<div class="footer">
+    <p>&copy; 2023 Doctor Dashboard</p>
+</div>
+</body>
+</html>

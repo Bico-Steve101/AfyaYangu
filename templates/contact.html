@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Afya Yangu</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Free HTML5 Website Template by uicookies.com" />
+  <meta name="keywords" content="free bootstrap 4, free bootstrap 4 template, free website templates, free html5, free template, free website template, html5, css3, mobile first, responsive" />
+  <meta name="author" content="uicookies.com" />
+  
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+ <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-blue probootstrap-navbar-dark">
+    <div class="container">
+      <!-- <a class="navbar-brand" href="index.html">Health</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-nav" aria-controls="probootstrap-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="probootstrap-nav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a href="/" class="nav-link pl-0">Home</a></li>
+          <li class="nav-item"><a href="{% url 'Afya:pharmacy' %}" class="nav-link">Pharmacy</a></li>
+          <li class="nav-item"><a href="{% url 'Afya:about' %}" class="nav-link">About</a></li>
+          <li class="nav-item active"><a href="{% url 'Afya:contact' %}" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="ml-auto">
+          <form action="#" method="get" class="probootstrap-search-form mb-sm-0 mb-3">
+            <div class="form-group">
+              <button class="icon submit"><span class="icon-magnifying-glass"></span></button>
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+  <header role="banner" class="probootstrap-header py-5">
+    <div class="container">
+      <div class="row">
+        <div>
+          <a href="index.html" class="mr-auto"><img class="logo" src="{% static 'images/Screenshot__30_-removebg-preview.png' %}" width="212" height="48" class="hires" ></a>
+        </div>  
+        <div class="col-md-9">
+          <div class="float-md-right float-none">
+          <div class="probootstrap-contact-phone d-flex align-items-top mb-3 float-left">
+            <span class="icon mr-2"><i class="icon-phone"></i></span>
+            <span class="probootstrap-text Yangu-text"> +254794675478 <small class="d-block"><a href="#" class="arrow-link Yangu-text">Appointment <i class="icon-chevron-right"></i></a></small></span>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="mb-5 float_shadow">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-5">
+          <h1 class="display-4">Contact Us</h1>
+          <p class="lead text-secondary">"Each day is an opportunity for a fresh start. We'll continue to work toward your recovery."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="probootstrap-services float_shadow">
+    <div class="container">
+      <div class="row no-gutters">
+        <div class="col-md-3 pb-5 probootstrap-aside-stretch-left probootstrap-inside">
+          <div class="mb-3 pt-5">
+            <h2 class="h6">Contact</h2>
+            <ul class="list-unstyled probootstrap-light mb-4">
+              <li class="active"><a href="#">Contact</a></li>
+              <li><a href="#">More Link</a></li>
+              <li><a href="#">Another Link</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class=" col-md-9 pl-md-5 pb-5 pl-0 probootstrap-inside">
+          <h1 class="mt-4 mb-4">Get In Touch</h1>
+          <div class="row">
+            <div class="col-md-12">
+              <form action="" method="post" class="probootstrap-form">
+                <div class="form-group">
+                  <label for="name" class="sr-only">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                  <label for="email" class="sr-only">Email</label>
+                  <input type="text" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                  <label for="message" class="sr-only">Message</label>
+                  <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Write your message"></textarea>
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn btn-primary" value="Send Message">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="probootstrap-subscribe">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h2 class="h1 text-white">Subscribe Newsletter</h2>
+          <p class="lead text-white">"Compassionate Care, Exceptional Results."</p>
+        </div>
+      </div>
+      <form action="#" method="post">
+        <div class="row">
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Name">    
+          </div>
+          <div class="col-md-4 mb-md-0 mb-3">
+            <input type="text" class="form-control" placeholder="Email">
+          </div>
+          <div class="col-md-4">
+            <input type="submit" value="Subscribe" class="btn btn-primary btn-block">
+          </div>
+        
+        </div>
+      </form>
+    </div>
+  </section>  
+
+  <footer class="probootstrap-footer">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-3">
+          <h3 class="heading">Latest Blog</h3>
+          <ul class="list-unstyled probootstrap-footer-recent-post">
+            <li>
+              <a href="#"><span class="date">October 1, 2023</span> Preventive Care: Prevention is often said to be the
+                  best medicine, and medical services excel in this area. Routine check-ups, vaccinations, and
+                  health screenings are essential components of preventive care. They detect potential health
+                  issues early, allowing for timely intervention. </a>
+            </li>
+            <li>
+              <a href="#"><span class="date">October 1, 2023</span>This month's question: "How can I maintain a healthy work-life balance?" </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h3 class="heading">Head Office</h3>
+          <p class="mb-5">Magadi road, Muungano Sacco Building,Ongata Rongai</p>
+          <h3 class="heading text-white">Open</h3> 
+          <p>
+            Mon-Fri 7:30-18:00 <br>
+            Sat 7:30-18:00 <br>
+            Sun 7:30-18:00
+          </p>
+        </div>
+        <div class="col-md-3">
+          <h3 class="heading">Quick Links</h3>
+          <ul class="list-unstyled probootstrap-footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Department</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h3 class="heading">Follow us</h3>
+          <ul class="probootstrap-footer-social">
+            <li><a href="#"><span class="icon-twitter"></span></a></li>
+            <li><a href="#"><span class="icon-facebook"></span></a></li>
+            <li><a href="#"><span class="icon-linkedin"></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- END row -->
+      <div class="row Afya Yangu-copyright">
+        <div class="col-md-12">
+          <p><small>&copy; 2023 <a href="https://uicookies.com/" target="_blank">Afya Yangu Health</a>. All Rights Reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- loader
+   -->
+    <div id="Afya Yangu-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#32609e"/></svg></div>
+  
+
+  <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+  
+</body>
+</html>

@@ -1,0 +1,229 @@
+/* Reset some default styles */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #343a40;
+}
+
+#doctor-profile {
+    margin-top: 7em;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    & p {
+        font-weight: bold;
+    }
+}
+#doctor-profile img{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+#user-messages {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.reply-link {
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.reply-form {
+    display: none;
+    margin-top: 10px;
+}
+
+/* Style the form */
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+.form-group{
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 6em;
+    & p {
+        font-weight: bold;
+    }
+}
+textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.home{
+    margin-top: 2px;
+    margin-left: 8px;
+    & a {
+        margin: auto!important;
+    text-decoration: none;
+    }
+    width: 7% !important;
+    font-weight: bold !important;
+}
+input[type="submit"] {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+label{
+    font-weight: bold;
+}
+::placeholder{
+    font-weight: bolder;
+    font-size: 1em;
+}
+input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Media queries for responsiveness */
+@media only screen and (max-width: 600px) {
+    #doctor-profile,
+    #user-messages {
+        padding: 15px;
+    }
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+ /* Sticky Navbar */
+        .navbar {
+            overflow: hidden;
+            background-color: #333; /* Add your desired background color */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Add a z-index to ensure it appears above other elements */
+        }
+
+        /*.navbar ul {*/
+        /*    list-style-type: none;*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*    overflow: hidden;*/
+        /*}*/
+
+        /*.navbar li {*/
+        /*    float: left;*/
+        /*}*/
+
+        /*.navbar a {*/
+        /*    display: block;*/
+        /*    color: white;*/
+        /*    text-align: center;*/
+        /*    padding: 14px 16px;*/
+        /*    text-decoration: none;*/
+        /*}*/
+
+        /*.navbar a:hover {*/
+        /*    background-color: #ddd; !* Add your desired hover background color *!*/
+        /*    color: black;*/
+        /*}*/
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+strong {
+    color: #007bff;
+}
+
+.reply-link {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.reply-form {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

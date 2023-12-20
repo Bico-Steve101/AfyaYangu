@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+</head>
+<body>
+    <h1 class="title">{{ request.user.username }}'s Cart</h1>
+    <section>
+    <div class="items">
+  {% if cart_items %}
+    <ul class="cart-items-list">
+        {% for item in cart_items %}
+            <div class="cart-item">
+                <img alt="{{ item.product.name }} image" src="{{ item.product.image.url }}">
+                <p>{{ item.product.name }}</p>
+                <p> Quantity: {{ item.quantity }}</p>
+                <p> Price: ${{ item.total_price }}</p>
+                <a href="{% url 'Afya:remove_from_cart' product_id=item.product.id %}">Remove</a>
+            </div>
+        {% endfor %}
+    </ul>
+    <p class="total-price">Total Price: ${{ total_price }}</p>
+
+    <form method="post" action="{% url 'Afya:make_payment' %}">
+        {% csrf_token %}
+        <button class="payment-button" type="submit">Make Payment</button>
+    </form>
+{% else %}
+    <p class="empty-cart-message">Your cart is empty.</p>
+    <p class="empty-cart-message"><a href="{% url 'Afya:pharmacy' %}">Browse all products</a></p>
+{% endif %}
+
+    </div>
+    </section>
+    <div class="user-info">
+     <p  style="font-weight: bold;">Username: {{ request.user.username }}</p>
+    <p  style="font-weight: bold;">Email: {{ request.user.email }}</p>
+                    <a href="{% url 'Afya:index' %}">Home</a>
+    </div>
+
+</body>
+</html>

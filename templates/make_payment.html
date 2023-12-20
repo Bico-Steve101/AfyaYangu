@@ -1,0 +1,50 @@
+{% load static %}
+<!-- templates/cart/make_payment.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/pay.css' %}">
+
+</head>
+<body>
+<section class="form">
+ <h2>Make Payment</h2>
+
+  <form method="post" action="{% url 'Afya:make_payment' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <h3>Cart Summary</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart.cartitem_set.all %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.product.price }}</td>
+            <td>${{ item.total_price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p>Total Amount: ${{ cart.total_price }}</p>
+    <div class="center">
+    <button type="submit">Pay Now</button>
+    </div>
+  </form>
+</section>
+</body>
+</html>

@@ -1,0 +1,485 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Afya Yangu </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="keywords" content="You can get your prescription, over-the-counter and front-shop products, including your favorite health supplement and homeopathic products, delivered in less than 2 hours in Nairobi and within 12hrs outside Nairobi." />
+  
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-blue probootstrap-navbar-dark">
+    <div class="container">
+      <!-- <a class="navbar-brand" href="index.html">Afya</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-nav" aria-controls="probootstrap-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="Afya Yangu-nav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a href="/" class="nav-link pl-0">Home</a></li>
+          <li class="nav-item active"><a href="{% url 'Afya:pharmacy' %}" class="nav-link">Pharmacy</a></li>
+          <li class="nav-item"><a href="{% url 'Afya:about' %}" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="{% url 'Afya:contact' %}" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="ml-auto">
+          <form action="#" method="get" class="Afya Yangu-search-form mb-sm-0 mb-3">
+            <div class="form-group">
+              <button class="icon submit"><span class="icon-magnifying-glass"></span></button>
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+  <header role="banner" class="Afya Yangu py-5">
+    <div class="container">
+      <div class="row">
+        <div >
+          <a href="index.html" class="mr-auto">
+              <img class="logo" src="{% static '/images/Screenshot__30_-removebg-preview.png' %}"
+                                                    width="250" height="60" class="hires" alt="Afya Yangu"></a>
+        </div>
+        <div class="col-md-9">
+          <div class="float-md-right float-none">
+          <div class="Afya Yangu-contact-phone d-flex align-items-top mb-3 float-left">
+            <span class="icon mr-2"><i class="icon-phone"></i></span>
+            <span class="Afya Yangu-text">+254794675478 <small class="d-block"><a href="#" class="arrow-link">Appointment <i class="icon-chevron-right"></i></a></small></span>
+          </div>
+          <div class="user_direct">
+              {% if user.is_authenticated %}
+                <li><a href="{% url 'Afya:view_cart' %}">View Cart</a></li>
+                <li><a href="{% url 'Afya:logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'Afya:login' %}">Login</a></li>
+            {% endif %}
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="mb-5 float_shadow">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-5">
+          <h1 class="display-4">Pharmacy</h1>
+          <p class="lead text-secondary">You can get your prescription, over-the-counter and front-shop products,
+              including your favorite health supplement and homeopathic products, delivered in less than 2 hours
+              in Nairobi and within 12hrs outside Nairobi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+ 
+  <section class="mb-5 float_shadow">
+    <div class="container">
+      <div class="row">
+        <h2 class="display-4">Our Products</h2>
+        <div class="products" class="col-md-6 mb-5">
+
+          <div class="shell">
+            <div class="container">
+              <div class="row">
+                          {% for product in products %}
+                <div class="col-md-3">
+                  <div class="wsk-cp-product">
+                    <div class="wsk-cp-img">
+                      <img src="{{ product.image.url }}" alt="Product" class="img-responsive" />
+                    </div>
+                    <div class="wsk-cp-text">
+                      <div class="category">
+                        <span>{{ product.category }}</span>
+                      </div>
+                      <div class="title-product">
+                        <h3>{{ product.name }}</h3>
+                      </div>
+                      <div class="description-prod">
+                        <p>{{ product.description }}</p>
+                      </div>
+                      <div class="card-footer">
+                        <div class="wcf-left">
+                            <span class="price">Ksh {{ product.price }}</span>
+                        </div>
+
+                          <form action="{% url 'Afya:add_to_cart' product_id=product.id %}" method="post">
+                            {% csrf_token %}
+{#                        <div class="wcf-right"><a href="#" class="buy-btn"> <i class="fa-solid fa-cart-shopping fa-beat"></i></a></div>#}
+                              <button class="wcf-right" type="submit">
+                                  <a href="{% url 'Afya:add_to_cart' product_id=product.id %}" class="buy-btn">
+                                      <i class="fa-solid fa-cart-shopping fa-beat"></i></a>
+                              </button>
+                          </form>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                              {% empty %}
+                              <h1>Empty</h1>
+                          {% endfor %}
+
+
+{#                <div class="col-md-3">#}
+{#                  <div class="wsk-cp-product">#}
+{#                    <div class="wsk-cp-img"><img src="{% static 'images/image 2.jpg' %}" alt="Product" class="img-responsive" /></div>#}
+{#                    <div class="wsk-cp-text">#}
+{#                      <div class="category">#}
+{#                        <span>Medicine</span>#}
+{#                      </div>#}
+{#                      <div class="title-product">#}
+{#                        <h3>Describe what the product does</h3>#}
+{#                      </div>#}
+{#                      <div class="description-prod">#}
+{#                        <p>Description Product tell me how to change playlist height size like 600px in html5 player.#}
+{#                            player good work now check this link</p>#}
+{#                      </div>#}
+{#                      <div class="card-footer">#}
+{#                        <div class="wcf-left"><span class="price">Ksh 500.000</span></div>#}
+{#                        <div class="wcf-right"><a href="#" class="buy-btn"><i class="fa-solid fa-cart-shopping fa-beat"></i></a></div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="col-md-3">#}
+{#                  <div class="wsk-cp-product">#}
+{#                    <div class="wsk-cp-img"><img src="{% static 'images/image3.jpg' %}" alt="Product" class="img-responsive" /></div>#}
+{#                    <div class="wsk-cp-text">#}
+{#                      <div class="category">#}
+{#                        <span>Medicine</span>#}
+{#                      </div>#}
+{#                      <div class="title-product">#}
+{#                        <h3>Describe what the product does</h3>#}
+{#                      </div>#}
+{#                      <div class="description-prod">#}
+{#                        <p>Description Product tell me how to change playlist height size like 600px in html5 player.#}
+{#                            player good work now check this link</p>#}
+{#                      </div>#}
+{#                      <div class="card-footer">#}
+{#                        <div class="wcf-left"><span class="price">Ksh 500.000</span></div>#}
+{#                        <div class="wcf-right"><a href="#" class="buy-btn"><i class="fa-solid fa-cart-shopping fa-beat"></i></a></div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="col-md-3">#}
+{#                  <div class="wsk-cp-product">#}
+{#                    <div class="wsk-cp-img"><img src="/images/image 1.jpg" alt="Product" class="img-responsive" /></div>#}
+{#                    <div class="wsk-cp-text">#}
+{#                      <div class="category">#}
+{#                        <span>Medicine</span>#}
+{#                      </div>#}
+{#                      <div class="title-product">#}
+{#                        <h3>Describe what the product does</h3>#}
+{#                      </div>#}
+{#                      <div class="description-prod">#}
+{#                        <p>Description Product tell me how to change playlist height size like 600px in html5 player.#}
+{#                            player good work now check this link</p>#}
+{#                      </div>#}
+{#                      <div class="card-footer">#}
+{#                        <div class="wcf-left"><span class="price">Ksh 500.000</span></div>#}
+{#                        <div class="wcf-right"><a href="#" class="buy-btn"><i class="fa-solid fa-cart-shopping fa-beat"></i></a></div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+              </div>
+{#              <div class="row">#}
+{#                <div class="col-md-3">#}
+{#                  <div class="wsk-cp-product">#}
+{#                    <div class="wsk-cp-img">#}
+{#                      <img src="{% static 'images/image 1.jpg' %}" alt="Product" class="img-responsive" />#}
+{#                    </div>#}
+{#                    <div class="wsk-cp-text">#}
+{#                      <div class="category">#}
+{#                        <span>Medicine</span>#}
+{#                      </div>#}
+{#                      <div class="title-product">#}
+{#                        <h3>Describe what the product does</h3>#}
+{#                      </div>#}
+{#                      <div class="description-prod">#}
+{#                        <p>Description Product tell me how to change playlist height size like 600px in html5 player.#}
+{#                            player good work now check this link</p>#}
+{#                      </div>#}
+{#                      <div class="card-footer">#}
+{#                        <div class="wcf-left"><span class="price">Ksh 500.000</span></div>#}
+{#                        <div class="wcf-right"><a href="#" class="buy-btn"> <i class="fa-solid fa-cart-shopping fa-beat"></i></a></div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="col-md-3">#}
+{#                  <div class="wsk-cp-product">#}
+{#                    <div class="wsk-cp-img"><img src="{% static 'images/image 2.jpg' %}" alt="Product" class="img-responsive" /></div>#}
+{#                    <div class="wsk-cp-text">#}
+{#                      <div class="category">#}
+{#                        <span>Medicine</span>#}
+{#                      </div>#}
+{#                      <div class="title-product">#}
+{#                        <h3>Describe what the product does</h3>#}
+{#                      </div>#}
+{#                      <div class="description-prod">#}
+{#                        <p>Description Product tell me how to change playlist height size like 600px in html5 player.#}
+{#                            player good work now check this link</p>#}
+{#                      </div>#}
+{#                      <div class="card-footer">#}
+{#                        <div class="wcf-left"><span class="price">Ksh 500.000</span></div>#}
+{#                        <div class="wcf-right"><a href="#" class="buy-btn"><i class="fa-solid fa-cart-shopping fa-beat"></i></a></div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="col-md-3">#}
+{#                  <div class="wsk-cp-product">#}
+{#                    <div class="wsk-cp-img"><img src="{% static 'images/image3.jpg' %}" alt="Product" class="img-responsive" /></div>#}
+{#                    <div class="wsk-cp-text">#}
+{#                      <div class="category">#}
+{#                        <span>Medicine</span>#}
+{#                      </div>#}
+{#                      <div class="title-product">#}
+{#                        <h3>Describe what the product does</h3>#}
+{#                      </div>#}
+{#                      <div class="description-prod">#}
+{#                        <p>Description Product tell me how to change playlist height size like 600px in html5 player.#}
+{#                            player good work now check this link</p>#}
+{#                      </div>#}
+{#                      <div class="card-footer">#}
+{#                        <div class="wcf-left"><span class="price">Ksh 500.000</span></div>#}
+{#                        <div class="wcf-right"><a href="#" class="buy-btn"><i class="fa-solid fa-cart-shopping fa-beat"></i></a></div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="col-md-3">#}
+{#                  <div class="wsk-cp-product">#}
+{#                    <div class="wsk-cp-img"><img src="{% static 'images/image 1.jpg' %}" alt="Product" class="img-responsive" /></div>#}
+{#                    <div class="wsk-cp-text">#}
+{#                      <div class="category">#}
+{#                        <span>Medicine</span>#}
+{#                      </div>#}
+{#                      <div class="title-product">#}
+{#                        <h3>Describe what the product does</h3>#}
+{#                      </div>#}
+{#                      <div class="description-prod">#}
+{#                        <p>Description Product tell me how to change playlist height size like 600px in html5 player.#}
+{#                            player good work now check this link</p>#}
+{#                      </div>#}
+{#                      <div class="card-footer">#}
+{#                        <div class="wcf-left"><span class="price">Ksh 500.000</span></div>#}
+{#                        <div class="wcf-right"><a href="#" class="buy-btn"><i class="fa-solid fa-cart-shopping fa-beat"></i></a></div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+            </div>
+          </div>
+          <!-- <div class="gallery">
+            <div>
+            <img src="/images/image 1.jpg" alt="medicine">
+            </div>
+            <div>
+            <img src="/images/image 2.jpg" alt="medicine">
+            </div>
+            <div class="p_image">
+            <img src="/images/image3.jpg" alt="medicine">
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <section class="probootstrap-services">
+    <div class="container">
+      <div class="row no-gutters">
+        <div class="col-md-3 probootstrap-aside-stretch-left">
+          <div class="mb-3">
+            <h2 class="h6">Medical Services</h2>
+            <ul class="list-unstyled probootstrap-light mb-4">
+              <li class="active"><a href="#">Health Support AIDS</a></li>
+              <li><a href="#">Diagnostic</a></li>
+              <li><a href="#">Self Kit</a></li>
+              
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="Afya Yangu-section float_shadow overlay bg-image" style="background-image: url(images/bg_1.jpg)">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="text-white display-4">Specialists in Family  Healthcare</h2>
+          <p class="text-white mb-5 lead">"Your Wellness, Our Expertise."</p>
+          <div class="row justify-content-center mb-5">
+               <div class="col-md-9 pl-md-5 pb-5 pl-0 Afya Yangu-inside">
+          <h1>TIPS</h1>
+          <p>Remember that preventive measures should be personalized to your individual health needs and risk factors.
+              Consult with your healthcare provider for guidance on creating a personalized plan for chronic disease
+              prevention and management based on your medical history and risk factors.</p>
+        </div>
+            <div class="col-md-4"><a href="#" class="btn btn-secondary btn-block">Appointment <span class="icon-arrow-right"></span></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+      
+  
+
+ 
+    <section class="probootstrap-section" id="section-counter">
+      <div class="container">
+        <div class="row">
+          <div class="col-md probootstrap-animate">
+            <div class="probootstrap-counter text-center">
+              <span class="probootstrap-number" data-number="22">0</span>
+              <span class="probootstrap-label">Founders</span>
+            </div>
+          </div>
+          <div class="col-md probootstrap-animate">
+            <div class="probootstrap-counter text-center">
+              <span class="probootstrap-number" data-number="182">0</span>
+              <span class="probootstrap-label">Number of Staffs</span>
+            </div>
+          </div>
+          <div class="col-md probootstrap-animate">
+            <div class="probootstrap-counter text-center">
+              <span class="probootstrap-number" data-number="8921">0</span>
+              <span class="probootstrap-label">Happy Patients</span>
+            </div>
+          </div>    
+          <div class="col-md probootstrap-animate">
+            <div class="probootstrap-counter text-center">
+              <span class="probootstrap-number" data-number="252">0</span>
+              <span class="probootstrap-label">Business Partner</span>
+            </div>
+          </div>    
+        </div>
+      </div>
+      
+    </section>
+
+<section class="probootstrap-subscribe">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h2 class="h1 text-white">Subscribe Newsletter</h2>
+          <p class="lead text-white">"Compassionate Care, Exceptional Results."</p>
+        </div>
+      </div>
+      <form action="#" method="post">
+        <div class="row">
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Name">    
+          </div>
+          <div class="col-md-4 mb-md-0 mb-3">
+            <input type="text" class="form-control" placeholder="Email">
+          </div>
+          <div class="col-md-4">
+            <input type="submit" value="Subscribe" class="btn btn-primary btn-block">
+          </div>
+        
+        </div>
+      </form>
+    </div>
+  </section>  
+
+  <footer class="probootstrap-footer">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-3">
+          <h3 class="heading">Latest Blog</h3>
+          <ul class="list-unstyled probootstrap-footer-recent-post">
+            <li>
+              <a href="#"><span class="date">October 1, 2023</span> Preventive Care: Prevention is often said to be the
+                  best medicine, and medical services excel in this area. Routine check-ups, vaccinations, and health
+                  screenings are essential components of preventive care. They detect potential health issues early,
+                  allowing for timely intervention. </a>
+            </li>
+            <li>
+              <a href="#"><span class="date">October 1, 2023</span>This month's question: "How can I maintain a healthy work-life balance?" </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h3 class="heading">Head Office</h3>
+          <p class="mb-5">Magadi road, Muungano Sacco Building,Ongata Rongai</p>
+          <h3 class="heading text-white">Open</h3> 
+          <p>
+            Mon-Fri 7:30-18:00 <br>
+            Sat 7:30-18:00 <br>
+            Sun 7:30-18:00
+          </p>
+        </div>
+        <div class="col-md-3">
+          <h3 class="heading">Quick Links</h3>
+          <ul class="list-unstyled probootstrap-footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Department</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h3 class="heading">Follow us</h3>
+          <ul class="probootstrap-footer-social">
+            <li><a href="#"><span class="icon-twitter"></span></a></li>
+            <li><a href="#"><span class="icon-facebook"></span></a></li>
+            <li><a href="#"><span class="icon-linkedin"></span></a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- END row -->
+      <div class="row Afya Yangu-copyright">
+        <div class="col-md-12">
+          <p><small>&copy; 2023 <a href="https://uicookies.com/" target="_blank">Afya Yangu Health</a>. All Rights Reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- loader
+   -->
+    <div id="Afya Yangu-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#32609e"/></svg></div>
+  
+
+  <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

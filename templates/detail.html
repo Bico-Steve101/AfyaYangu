@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ doctor.name }} Profile</h1>
+    <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}">
+    <p>{{ doctor.description }}</p>
+
+    {% if patient_chats.exists %}
+        <h2>Conversation with Dr. {{ doctor.name }}</h2>
+        <ul id="message-list">
+            {% for message in patient_chats.message_set.all %}
+                <li>
+                    <strong>{{ message.sender.username }}:</strong> {{ message.content }}
+                    {% if not message.read %}
+                        <span class="unread-message">New</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't sent any messages to this doctor yet.</p>
+    {% endif %}
+
+    <form id="message-form" method="post">
+        {% csrf_token %}
+        <textarea name="message_content" id="message-content" placeholder="Type your message here" rows="5"></textarea>
+        <button type="submit" id="send-message-button">Send Message</button>
+    </form>
+
+<script>
+    $(document).ready(function() {
+        var socket = io('ws://localhost:8000/ws');
+
+        socket.on('new_message', function(data) {
+            var message_html = '<li><strong>' + data.sender + ':</strong> ' + data.content + '</li>';
+            $('#message-list').append(message_html);
+        });
+
+        $('#send-message-button').click(function(event) {
+            event.preventDefault();
+
+            var message_content = $('#message-content').val();
+            if (message_content) {
+                socket.emit('send_message', {
+                    content: message_content,
+                    doctor_id: {{ doctor.id }}
+                });
+
+                $('#message-content').val('');
+            }
+        });
+    });
+</script>
+{% endblock %}

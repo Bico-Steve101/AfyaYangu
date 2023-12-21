@@ -40,7 +40,7 @@
           <li class="nav-item"><a href="{% url 'Afya:contact' %}" class="nav-link">Contact</a></li>
         </ul>
         <div class="ml-auto">
-          <form action="#" method="get" class="Afya Yangu-search-form mb-sm-0 mb-3">
+           <form action="#" method="get" class="probootstrap-search-form mb-sm-0 mb-3">
             <div class="form-group">
               <button class="icon submit"><span class="icon-magnifying-glass"></span></button>
               <input type="text" class="form-control" placeholder="Search">
@@ -61,17 +61,18 @@
         </div>
         <div class="col-md-9">
           <div class="float-md-right float-none">
-          <div class="Afya Yangu-contact-phone d-flex align-items-top mb-3 float-left">
-            <span class="icon mr-2"><i class="icon-phone"></i></span>
-            <span class="Afya Yangu-text">+254794675478 <small class="d-block"><a href="#" class="arrow-link">Appointment <i class="icon-chevron-right"></i></a></small></span>
-          </div>
-          <div class="user_direct">
-              {% if user.is_authenticated %}
-                <li><a href="{% url 'Afya:view_cart' %}">View Cart</a></li>
-                <li><a href="{% url 'Afya:logout' %}">Logout</a></li>
+              <div class="user_direct">
+               {% if user.is_authenticated %}
+                <li><a href="{% url 'Afya:view_cart' %}">View Cart <i class="fa-solid fa-arrow-right"></i> </a></li>
+                   <li><button class="btn-user "><a href="{% url 'Afya:logout' %}">Logout</a></button></li>
             {% else %}
-                <li><a href="{% url 'Afya:login' %}">Login</a></li>
+                <li><button class="btn-user "><a href="{% url 'Afya:login' %}">Login</a></button></li>
             {% endif %}
+                    </div>
+          <div class="probootstrap-contact-phone d-flex align-items-top mb-3 float-left">
+            <span class="icon mr-2 Yangu-text"><i class=" Yangu-text icon-phone"></i></span>
+            <span class="probootstrap-text Yangu-text"> +254794675478 <small class="d-block">
+                <a href="#Appointment" class="arrow-link">Appointment <i class="icon-chevron-right"></i></a></small></span>
           </div>
           </div>
         </div>
@@ -82,7 +83,7 @@
   <section class="mb-5 float_shadow">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mb-5">
+        <div class="advice">
           <h1 class="display-4">Pharmacy</h1>
           <p class="lead text-secondary">You can get your prescription, over-the-counter and front-shop products,
               including your favorite health supplement and homeopathic products, delivered in less than 2 hours
@@ -95,8 +96,8 @@
 
  
   <section class="mb-5 float_shadow">
-    <div class="container">
-      <div class="row">
+    <div class="container advice">
+      <div class="row advice">
         <h2 class="display-4">Our Products</h2>
         <div class="products" class="col-md-6 mb-5">
 
